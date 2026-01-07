@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container-fluid" style="background-color: #006400; padding: 20px; border-radius: 10px;">
+<div class="row">
+<div class="col-lg-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title" style="font-size: 18px; font-weight: bold; color: red;text-align: center;">Manage Visitor</h4>
+                                <hr>
+                                <div class="basic-form">
+                                    {% include 'includes/messages.html' %}
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered zero-configuration">
+                                        <thead  style="font-size: 14px; font-weight: bold; color: blue;">
+                                            <tr style="font-size: 14px; font-weight: bold;">
+                                                <th>S.No</th>
+                                                <th>Full Name</th>
+                                                <th>Contact Number</th>
+                                                <th>Email</th>
+                                                <th>Entery Date and Time</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                                
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for i in visitor %}
+                                            <tr style="font-size: 14px; font-weight: bold;">
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ i.fullname}}</td>
+                                                <td>{{ i.mobilenumber}}</td>
+                                                <td>{{ i.email}}</td>
+                                                <td>{{ i.created_at}}</td>
+                                                {% if i.status == '0' %}
+                                                <td>Visitor In</td>
+                                                {% else %}
+                                                <td>{{ i.status}}</td>{% endif %}
+                                                {% if i.status == '0' %}
+                                                <td><a href="{% url 'update_visitor' i.id %}" class="btn btn-success">Update </a><a href="{% url 'delete_visitor' i.id %}" class="btn btn-danger">Delete</a></td>
+                                                {% else %}
+                                                <td><a class="btn btn-success">Out </a><a href="{% url 'delete_visitor' i.id %}" class="btn btn-danger">Delete</a></td>{% endif %}
+                                               
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                        <tfoot style="font-size: 14px; font-weight: bold; color: blue;">
+                                            <tr>
+                                                <th>S.No</th>
+                                                <th>Full Name</th>
+                                                <th>Contact Number</th>
+                                                <th>Email</th>
+                                                <th>Entery Date and Time</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                </div>
+                                <div class="pagination">
+                                    <ul class="pagination">
+                                        {% if visitor.has_previous %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page=1">&laquo; First</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ visitor.previous_page_number }}">Previous</a>
+                                            </li>
+                                        {% endif %}
+                                
+                                        <li class="page-item disabled">
+                                            <span class="page-link">Page {{ visitor.number }} of {{ visitor.paginator.num_pages }}</span>
+                                        </li>
+                                
+                                        {% if visitor.has_next %}
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ visitor.next_page_number }}">Next</a>
+                                            </li>
+                                            <li class="page-item">
+                                                <a class="page-link" href="?page={{ visitor.paginator.num_pages }}">Last &raquo;</a>
+                                            </li>
+                                        {% endif %}
+                                    </ul>
+                                </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                  </div>
+</div>
+
+
+{% endblock %}
