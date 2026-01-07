@@ -4,3 +4,4 @@ Windows filter=lfs diff=lfs merge=lfs -text
 Application.zip filter=lfs diff=lfs merge=lfs -text
 Application filter=lfs diff=lfs merge=lfs -text
 V2.zip filter=lfs diff=lfs merge=lfs -text
+Visitor[[:space:]]Management[[:space:]]Windows[[:space:]]Application[[:space:]]V2.zip filter=lfs diff=lfs merge=lfs -text
